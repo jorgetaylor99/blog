@@ -21,7 +21,7 @@ class Comment(models.Model):
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     message = models.TextField()
-    creation_date = models.DateTimeField('comment date')
+    creation_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Comment by {self.name} on {self.post}"

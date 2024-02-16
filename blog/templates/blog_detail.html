@@ -1,3 +1,14 @@
 <h1>{{ post.title }}</h1>
-<h3>By {{ post.author.name }} on {{ post.pub_date }}</h3>
 <p>{{ post.content }}</p>
+
+{% for comment in comments %}
+    <div>
+        <p>{{ comment.creation_date }} {{ comment.name }}: {{ comment.message }}</p>
+    </div>
+{% endfor %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Add comment</button>
+</form>
