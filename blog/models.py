@@ -9,10 +9,19 @@ class Author(models.Model):
         return self.name
 
 class BlogPost(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()
     pub_date = models.DateTimeField('date published')
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    message = models.TextField()
+    creation_date = models.DateTimeField('comment date')
+
+    def __str__(self):
+        return f"Comment by {self.name} on {self.post}"
